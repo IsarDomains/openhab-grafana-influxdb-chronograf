@@ -1,0 +1,62 @@
+version: "3.7"
+services:
+
+  openhab2:
+    image: openhab/openhab:latest
+    container_name: smarthome_openhab
+    env_file:
+      - 'openhab2.env'
+    volumes:
+      - '/etc/localtime:/etc/localtime:ro'
+      - '/etc/timezone:/etc/timezone:ro'
+      - '/opt/smarthome/openhab/conf:/openhab/conf'
+      - '/opt/smarthome/openhab/userdata:/openhab/userdata'
+      - '/opt/smarthome/openhab/addons:/openhab/addons'
+      - '/opt/smarthome/openhab/.java:/openhab/.java'
+    devices:
+      - '/dev/ttyAMA0:/dev/ttyAMA0'
+    ports:
+      - '8080:8080'
+  
+  influxdb:
+      image: influxdb:latest
+      container_name: smarthome_influxdb
+      networks:
+        - 'influxdb'
+      ports:
+        - '8083:8083'
+        - '8086:8086'
+        - '8090:8090'
+      env_file:
+        - 'influxdb.env'
+      volumes:
+        - '/opt/smarthome/influxdb:/var/lib/influxdb'
+
+  chronograf:
+      image: chronograf:latest 
+      container_name: smarthome_chronograf
+      networks:
+        - 'influxdb'
+      ports:
+        - '8888:8888'
+      env_file:
+        - 'chronograf.env'
+      links:
+        - influxdb
+      volumes:
+        - '/opt/smarthome/chronograf:/var/lib/chronograf'
+
+  grafana:
+      image: grafana/grafana:latest
+      container_name: smarthome_grafana
+      ports:
+        - "3000:3000"
+      env_file:
+        - 'grafana.env'
+      user: "0"
+      links:
+        - influxdb
+      volumes:
+        - '/opt/smarthome/grafana:/var/lib/grafana'
+networks: 
+   influxdb:
