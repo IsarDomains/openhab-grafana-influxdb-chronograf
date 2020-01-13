@@ -1,0 +1,26 @@
+# Template fuer Unix' systemd Suite um alle Container, denfiniert in 
+# isardomains/openhab-grafana-influxdb-chronograf/docker-compose/docker-compose.yml
+# bei einem Systemneustart des RasPi ebenfalls neu zu starten.
+[Unit]
+Description=Smarthome Docker Services
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+
+# Alles alte Loeschen (Container, Volumes und Images)
+ExecStartPre=docker-compose -f /opt/smarthome/docker-compose/docker-compose.yml down -v
+ExecStartPre=docker-compose -f /opt/smarthome/docker-compose/docker-compose.yml rm -v
+ExecStartPre=-/bin/bash -c 'docker volume rm $(docker volume ls -q)'
+ExecStartPre=-/bin/bash -c 'docker rmi $(docker images | grep "<none>" | awk \'{print $3}\')'
+ExecStartPre=-/bin/bash -c 'docker rm -v $(docker ps -aq)'
+
+# Compose up
+ExecStart=docker-compose -f /opt/smarthome/docker-compose/docker-compose.yml up
+
+# Compose down, auch alle Container loeschen
+ExecStop=docker-compose -f /opt/smarthome/docker-compose/docker-compose.yml down -v
+
+[Install]
+WantedBy=multi-user.target
