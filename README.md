@@ -24,6 +24,7 @@ Damit nach dem Abräumen der Container die darin angelegten Daten auch nach eine
  - Grafana: ```sudo mkdir /opt/smarthome/grafana```
  - InfluxDB: ```sudo mkdir /opt/smarthome/influxdb```
  - Chronograf: ```sudo mkdir /opt/smarthome/chronograf```
+ - deCONZ: ```sudo mkdir /opt/smarthome/deconz```
   
 So sollte das ```/opt/smarthome``` Verzeichnis am Ende aussehen, wenn alle Ordner vorhanden sind:
 <img src="https://user-images.githubusercontent.com/35771024/72264484-1d312b80-361b-11ea-9b92-f7f53d46c69e.png" title="Verzeichnisstruktur auf dem RasPi 3." width="300" />
@@ -41,6 +42,7 @@ Sollte optional Portainer auf dem RasPi laufen, kann man hierüber einfach nachs
 ### Login ###
 Die einzelnen Web-Logins erreicht ihr über die gemappten Standardports der jeweiligen Applikationen:
  - openHAB2: ```http://<ip_des_raspi>:8080```
+ - deConz: ```http://<ip_des_raspi>:8085```
  - Grafana: ```http://<ip_des_raspi>:3000```
  - Chronograf: ```http://<ip_des_raspi>:8888``` 
  - InfluxDB: ```http://<ip_des_raspi>:8086``` Achtung: Diese IP wird nun beim Aufsetzten der Datenbank in Chronograf benötigt.
