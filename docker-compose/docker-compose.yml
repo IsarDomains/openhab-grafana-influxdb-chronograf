@@ -14,7 +14,7 @@ services:
       - '/opt/smarthome/openhab/addons:/openhab/addons'
       - '/opt/smarthome/openhab/.java:/openhab/.java'
     devices:
-      - '/dev/ttyAMA0:/dev/ttyAMA0'
+      - '/dev/ttyACM0'
     ports:
       - '8080:8080'
   
@@ -58,5 +58,17 @@ services:
         - influxdb
       volumes:
         - '/opt/smarthome/grafana:/var/lib/grafana'
+
+  deconz:
+      image: marthoc/deconz
+      container_name: smarthome_deconz
+      network_mode: host
+      restart: always
+      volumes:
+        - '/opt/smarthome/deconz:/root/.local/share/dresden-elektronik/deCONZ'
+      devices:
+        - '/dev/ttyACM0'
+      env_file:
+        - 'deconz.env'
 networks: 
    influxdb:
