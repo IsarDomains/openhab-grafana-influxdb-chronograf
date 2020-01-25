@@ -6,6 +6,8 @@
  - [Chronograf](https://influxdata.com/time-series-platform/chronograf/) (Datenbankmonitoring für InfluxDB)
  - [deConz](https://phoscon.de/de/conbee2) (ZigBee USB-Gateway *conBee2* von Dresden-Elektronik)
  
+ Alle Daten aus den Applikationen werden ausserhalb der Container, direkt auf dem Raspberry Pi, gespeichert. Damit sind sie persistent.
+ 
 # Voraussetzungen
 Folgende Voraussetzungen sollten gegeben sein um die Container zu starten:
  - Raspberry Pi 3 (Model B) mit Raspbian Image (https://www.raspberrypi.org/downloads/raspbian/)
