@@ -1,13 +1,18 @@
-# openhab-grafana-influxdb-chronograf
-YAML Datei für Docker um openHAB2 in Verbindung mit Grafana (verwendet InfluxDB) auf einen Raspberry Pi 3 auszuführen. 
-
+# openhab-grafana-influxdb-chronograf-deConz
+```docker-compose``` Datei welche die folgenden Applikationen jeweils in einem eigenen Container startet:
+ - [openHAB](https://openhab.org) (Home Automation Software)
+ - [Grafana](https://grafana.com) (Analyse & Monitoring von gespeicherten Werten aus openHAB2)
+ - [InfluxDB](https://influxdata.com) (Datenbankapplikation auf die Grafana zugreift)
+ - [Chronograf](https://influxdata.com/time-series-platform/chronograf/) (Datenbankmonitoring für InfluxDB)
+ - [deConz](https://phoscon.de/de/conbee2) (ZigBee USB-Gateway *conBee2* von Dresden-Elektronik)
+ 
 # Voraussetzungen
 Folgende Voraussetzungen sollten gegeben sein um die Container zu starten:
  - Raspberry Pi 3 (Model B) mit Raspbian Image (https://www.raspberrypi.org/downloads/raspbian/)
  - Zugriff auf den RasPi via SSH und FTP mit einem User mit Root-Rechten
  - ```docker``` muss installiert sein (https://www.docker.com/blog/happy-pi-day-docker-raspberry-pi/) und als Service bei Systemstart geladen werden (```sudo systemctl enable docker.service``` && ```sudo systemctl start docker.service```) 
  - ```docker-compose``` muss installiert sein
- - [Optional] Portainer zur einfachen Verwaltung und Kontrolle der Docker-Container installieren (http://portainer.io/) 
+ - Optional: [Portainer](http://portainer.io/) zur einfachen Verwaltung und Kontrolle der Docker-Container installieren. 
  
 # Installation
 Zur Vereinfachung befinden sich sämtliche Dateien - sowohl die YAML Datei als auch alle Container Mappings (siehe unten) - in einem Verzeichnis auf dem RasPi: ```/opt/smarthome```
