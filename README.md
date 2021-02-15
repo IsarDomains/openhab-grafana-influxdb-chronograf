@@ -1,7 +1,7 @@
 # openhab-grafana-influxdb-chronograf-deConz
 ```docker-compose``` Datei welche die folgenden Applikationen jeweils in einem eigenen Container startet:
  - [openHAB](https://openhab.org) (Home Automation Software)
- - [Grafana](https://grafana.com) (Analyse & Monitoring von gespeicherten Werten aus openHAB2)
+ - [Grafana](https://grafana.com) (Analyse & Monitoring von gespeicherten Werten aus openHAB)
  - [InfluxDB](https://influxdata.com) (Datenbankapplikation auf die Grafana zugreift)
  - [Chronograf](https://influxdata.com/time-series-platform/chronograf/) (Datenbankmonitoring für InfluxDB)
  - [deConz](https://phoscon.de/de/conbee2) (ZigBee USB-Gateway *conBee2* von Dresden-Elektronik)
@@ -27,7 +27,7 @@ Zur Vereinfachung befinden sich sämtliche Dateien - sowohl die YAML Datei als a
 
 # Mapping der Containerinhalte
 Damit nach dem Abräumen der Container die darin angelegten Daten auch nach einem Neustart wieder verfügbar sind, werden die Datenverzeichnisse der einzelnen Container auf gleichnamige Verzeichnisse des RasPi unter ```/opt/smarthome``` gemappt. Diese müssen angelegt werden:
- - openHAB2: ```sudo mkdir /opt/smarthome/openhab```
+ - openHAB: ```sudo mkdir /opt/smarthome/openhab```
  - Grafana: ```sudo mkdir /opt/smarthome/grafana```
  - InfluxDB: ```sudo mkdir /opt/smarthome/influxdb```
  - Chronograf: ```sudo mkdir /opt/smarthome/chronograf```
@@ -41,15 +41,15 @@ Der folgende Befehl führt die Befehle in der YAML Datei aus und startet die Con
 
 ```docker-compose -f /opt/smarthome/docker-compose/docker-compose.yml up```
 
-Das dauert etwas, da die Images für openHAB2, Grafana, InfluxDB und Chronograf erst heruntergeladen werden müssen. Für alle Images wird der Tag ```:latest``` verwendet.
+Das dauert etwas, da die Images für openHAB, Grafana, InfluxDB und Chronograf erst heruntergeladen werden müssen. Für alle Images wird der Tag ```:latest``` verwendet.
 
 Sollte optional Portainer auf dem RasPi laufen, kann man hierüber einfach nachschauen, ob alle Images bereits gestartet sind. Ist dies der Fall, schaut es in der Portainer Oberfläche im Bereich *Container* ungefähr so hier aus:
 ![image](https://user-images.githubusercontent.com/35771024/72262426-320bc000-3617-11ea-9bee-9cc2dafa0b8d.png)
 
 ### Login ###
 Die einzelnen Web-Logins erreicht ihr über die gemappten Standardports der jeweiligen Applikationen:
- - openHAB2: ```http://<ip_des_raspi>:8080```
+ - openHAB3: ```http://<ip_des_raspi>:8080```
  - deConz: ```http://<ip_des_raspi>:8085```
  - Grafana: ```http://<ip_des_raspi>:3000```
  - Chronograf: ```http://<ip_des_raspi>:8888``` 
- - InfluxDB: ```http://<ip_des_raspi>:8086``` Achtung: Diese IP wird nun beim Aufsetzten der Datenbank in Chronograf benötigt.
+ - InfluxDB: ```http://<ip_des_raspi>:8086``` Achtung: Diese IP wird nur beim Aufsetzten der Datenbank in Chronograf benötigt.
