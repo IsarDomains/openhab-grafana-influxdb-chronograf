@@ -2,12 +2,12 @@ version: "3.7"
 services:
 
   openhab2:
-    image: openhab/openhab:latest
+    image: openhab/openhab:3.0.1
     container_name: smarthome_openhab
     restart: always
     network_mode: host
     env_file:
-      - 'openhab2.env'
+      - 'openhab.env'
     volumes:
       - '/etc/localtime:/etc/localtime:ro'
       - '/etc/timezone:/etc/timezone:ro'
